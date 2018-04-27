@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>new ptoect</title>
+</head>
+<body id="result">
+
+<canvas id="canvasld" width="1500" height="800"style="border:1px dotted black;margin-left:100px; margin-top:100px;float:left">
+Hey привет
+</canvas>
+<script src="js/rect.js"></script>
+<script src="js/ball.js"></script>
+<script src="js/crash.js"></script>
+<script src="js/beginGame.js"></script>
+<script src="js/point.js"></script>
+<script src="js/draw.js"></script>
+<script type="text/javascript">
+var canvas = document.getElementById("canvasld");
+var width =1500;
+var height = 800;
+canvas.width = width;
+canvas.height = height;
+var  ctx  =  canvas.getContext("2d");
+
+  ctx.fillStyle ="green";
+  ctx.strokeStyle ='#f20039';
+  ctx.lineWidth =1;
+  
+  var Rball = width /53;
+  var pulMid = width/2 - Rball*1.5 ;
+  var pulLeftX =  Rball*2 ;
+  var pulRightX = width - Rball*2 ;
+  var pulTopY = Rball*2 ;
+  var pulDownY = height - Rball*2 ;
+  var Ball = [];
+  var minCrashMoveBitok =0.5;
+   
+  beginGame();
+   
+  canvas.onclick =function(e){
+  
+    var x,y;
+	x = e.offsetX;
+	y = e.offsetY;
+    console.log(e);
+    var p = new point (x,y);
+	
+    Ball[0].moveBitok(p);
+	
+	
+  };
+
+
+  var clear = function () {
+  
+    ctx.fillStyle ="#055105";
+    ctx.fillRect(0,0,width,height);
+
+  }
+
+
+
+  
+ 
+  
+  
+
+
+  //
+//Ball.push(new ball(200,100,20,1,1,0));
+//Ball.push(new ball(600,100,20,1,-1,0));
+//Ball.push(new ball(400,400,20,1,0,1));
+
+   
+  
+	
+
+ // var  ans = lengthPoint(Ball[0],Ball[1]);
+  
+  var time =function (){
+
+       clear();
+	   drawBoard();
+	  // ctx.strokeStyle ='#7474d6';
+	  // var v= Math.sqrt(Ball[0].vx * Ball[0].vx +Ball[0].vy * Ball[0].vy );
+	 //  if(v>minCrashMoveBitok)
+	 //  ctx.strokeStyle ='red';
+	  // ctx.strokeText( v,10,10);
+	 ctx.stroke();
+     for( i in Ball) {
+	 
+	   crashBall(Ball[i],i);
+	   crashBorder(Ball[i]);
+	   crashFriction(Ball[i]);
+	 } 
+	 
+    for( i in Ball) {
+	  Ball[i].move(); 
+	  
+	  if(Ball[i].type == 0)
+	    Ball[i].draw('black');
+	  else
+	  if(Ball[i].type == 2)
+	    Ball[i].draw('black');
+	  else
+  	    Ball[i].draw('white');
+		
+	}
+	 
+  }
+	
+  setInterval(time,10);
+	
+ctx.strokeText(ans,10,10);
+
+
+
+</script>
+
+
+</body>
+
+ 
+</html>
